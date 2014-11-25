@@ -8,6 +8,8 @@
 
 #import "SDWebImageCompat.h"
 #import "SDWebImageManager.h"
+#import "YLGIFImage.h"
+#import "YLImageView.h"
 
 /**
  * Integrates SDWebImage async downloading and caching of remote images with UIImageView.

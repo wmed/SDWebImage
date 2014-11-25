@@ -23,6 +23,9 @@
 		53EEC18916484553007601E1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 53EEC18816484553007601E1 /* Default-568h@2x.png */; };
 		DA248D44195470FD00390AB0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 537612E3155ABA3C005750A4 /* MapKit.framework */; };
 		DA248D79195484A500390AB0 /* libSDWebImage+WebP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA248D761954841D00390AB0 /* libSDWebImage+WebP.a */; };
+		E4052DB31A25047E00718397 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4052DB21A25047E00718397 /* QuartzCore.framework */; };
+		E4052DB91A25049B00718397 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4052DB81A25049B00718397 /* MobileCoreServices.framework */; };
+		E4052DBC1A2507F700718397 /* MasterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4052DBB1A2507F700718397 /* MasterTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +75,10 @@
 		53A2B50C155B155A00B12423 /* placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder@2x.png"; sourceTree = "<group>"; };
 		53EEC18816484553007601E1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		DA248D6C1954841D00390AB0 /* SDWebImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SDWebImage.xcodeproj; path = ../SDWebImage.xcodeproj; sourceTree = "<group>"; };
+		E4052DB21A25047E00718397 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		E4052DB81A25049B00718397 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		E4052DBA1A2507F700718397 /* MasterTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterTableViewCell.h; sourceTree = "<group>"; };
+		E4052DBB1A2507F700718397 /* MasterTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +86,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4052DB91A25049B00718397 /* MobileCoreServices.framework in Frameworks */,
+				E4052DB31A25047E00718397 /* QuartzCore.framework in Frameworks */,
 				DA248D79195484A500390AB0 /* libSDWebImage+WebP.a in Frameworks */,
 				DA248D44195470FD00390AB0 /* MapKit.framework in Frameworks */,
 				531041C1157EAC8F00BBABC3 /* ImageIO.framework in Frameworks */,
@@ -112,6 +121,8 @@
 		53761298155AB74D005750A4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E4052DB81A25049B00718397 /* MobileCoreServices.framework */,
+				E4052DB21A25047E00718397 /* QuartzCore.framework */,
 				537612E6155ABA44005750A4 /* ImageIO.framework */,
 				537612E3155ABA3C005750A4 /* MapKit.framework */,
 				53761299155AB74D005750A4 /* UIKit.framework */,
@@ -133,6 +144,8 @@
 				537612AF155AB74D005750A4 /* DetailViewController.m */,
 				537612B1155AB74D005750A4 /* MasterViewController.xib */,
 				537612B4155AB74D005750A4 /* DetailViewController.xib */,
+				E4052DBA1A2507F700718397 /* MasterTableViewCell.h */,
+				E4052DBB1A2507F700718397 /* MasterTableViewCell.m */,
 				537612A0155AB74D005750A4 /* Supporting Files */,
 			);
 			path = "SDWebImage Demo";
@@ -261,6 +274,7 @@
 				537612A6155AB74D005750A4 /* main.m in Sources */,
 				537612AA155AB74D005750A4 /* AppDelegate.m in Sources */,
 				537612AD155AB74D005750A4 /* MasterViewController.m in Sources */,
+				E4052DBC1A2507F700718397 /* MasterTableViewCell.m in Sources */,
 				537612B0155AB74D005750A4 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

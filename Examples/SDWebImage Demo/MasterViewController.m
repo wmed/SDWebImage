@@ -9,6 +9,7 @@
 #import "MasterViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "DetailViewController.h"
+#import "MasterTableViewCell.h"
 
 @interface MasterViewController () {
     NSArray *_objects;
@@ -24,6 +25,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self)
     {
+        
         self.title = @"SDWebImage";
         self.navigationItem.rightBarButtonItem = [UIBarButtonItem.alloc initWithTitle:@"Clear Cache"
                                                                                 style:UIBarButtonItemStylePlain
@@ -373,15 +375,27 @@
 {
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    MasterTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[MasterTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        
+        cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
+        cell.imageView.image = [UIImage imageNamed:@"placeholder"];
+        
+        cell.ylImageView = [YLImageView new];
+        cell.ylImageView.frame = CGRectMake(16, 0, 58, 43.5);
+        cell.ylImageView.clipsToBounds = YES;
+        cell.ylImageView.contentMode = cell.imageView.contentMode;
+        
+        [cell addSubview:cell.ylImageView];
+        [cell.imageView removeFromSuperview];
     }
 
     cell.textLabel.text = [NSString stringWithFormat:@"Image #%ld", (long)indexPath.row];
-    cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
-    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[_objects objectAtIndex:indexPath.row]]
+    
+    NSLog(@"%@", cell.ylImageView);
+    [cell.ylImageView sd_setImageWithURL:[NSURL URLWithString:[_objects objectAtIndex:indexPath.row]]
                       placeholderImage:[UIImage imageNamed:@"placeholder"] options:indexPath.row == 0 ? SDWebImageRefreshCached : 0];
     return cell;
 }
