@@ -393,7 +393,6 @@
 			isa = PBXGroup;
 			children = (
 				53922D74148C55820056699D /* SDWebImage */,
-				E4052D9B1A2502A000718397 /* YLGIFImage */,
 				53922D71148C55820056699D /* Frameworks */,
 				53922D70148C55820056699D /* Products */,
 			);
@@ -434,6 +433,7 @@
 				53922DAA148C56470056699D /* Cache */,
 				53922DAC148C56DD0056699D /* Utils */,
 				53922DA9148C562D0056699D /* Categories */,
+				E4052D9B1A2502A000718397 /* YLGIFImage */,
 			);
 			path = SDWebImage;
 			sourceTree = "<group>";
@@ -629,7 +629,6 @@
 				E4052D9F1A2502C800718397 /* YLImageView.m */,
 			);
 			name = YLGIFImage;
-			path = SDWebImage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
