@@ -17,12 +17,12 @@ Pod::Spec.new do |s|
                   'and performances!'
 
   s.requires_arc = true
-  s.framework = 'ImageIO'
+  s.frameworks = 'Foundation', 'UIKit', 'MobileCoreServices', 'ImageIO', 'CoreGraphics'
   
   s.default_subspec = 'Core'
 
   s.subspec 'Core' do |core|
-    core.source_files = 'SDWebImage/{NS,SD,UI}*.{h,m}'
+    core.source_files = 'SDWebImage/{NS,SD,UI,YL}*.{h,m}'
     core.exclude_files = 'SDWebImage/UIImage+WebP.{h,m}'
   end
 
