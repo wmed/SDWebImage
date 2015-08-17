@@ -392,6 +392,9 @@
         [cell.imageView removeFromSuperview];
     }
 
+    [cell.imageView setShowActivityIndicatorView:YES];
+    [cell.imageView setIndicatorStyle:UIActivityIndicatorViewStyleGray];
+
     cell.textLabel.text = [NSString stringWithFormat:@"Image #%ld", (long)indexPath.row];
     
     NSLog(@"%@", cell.ylImageView);
