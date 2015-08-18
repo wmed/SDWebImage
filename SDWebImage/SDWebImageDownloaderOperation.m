@@ -11,11 +11,14 @@
 #import "UIImage+MultiFormat.h"
 #import <ImageIO/ImageIO.h>
 #import "SDWebImageManager.h"
+#import "INDGIFPreviewDownloader.h"
 
 NSString *const SDWebImageDownloadStartNotification = @"SDWebImageDownloadStartNotification";
 NSString *const SDWebImageDownloadReceiveResponseNotification = @"SDWebImageDownloadReceiveResponseNotification";
 NSString *const SDWebImageDownloadStopNotification = @"SDWebImageDownloadStopNotification";
 NSString *const SDWebImageDownloadFinishNotification = @"SDWebImageDownloadFinishNotification";
+
+NSInteger const kMAX_GIF_SIZE = 2*1024*1024;;
 
 @interface SDWebImageDownloaderOperation () <NSURLConnectionDataDelegate>
 
@@ -251,7 +254,12 @@ NSString *const SDWebImageDownloadFinishNotification = @"SDWebImageDownloadFinis
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
     [self.imageData appendData:data];
-
+    if ((self.options & SDWebImageDownloaderLimitGifSize) && self.expectedSize >= kMAX_GIF_SIZE && [INDGIFPreviewDownloader dataForFirstGIFFrameInBuffer:self.imageData error:nil]) {
+        [connection cancel];
+        [self connectionDidFinishLoading:connection];
+        return;
+    }
+    
     if ((self.options & SDWebImageDownloaderProgressiveDownload) && self.expectedSize > 0 && self.completedBlock) {
         // The following code is from http://www.cocoaintheshell.com/2011/05/progressive-images-download-imageio/
         // Thanks to the author @Nyx0uf
