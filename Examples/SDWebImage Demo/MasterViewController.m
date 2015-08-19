@@ -399,7 +399,7 @@
     
     NSLog(@"%@", cell.ylImageView);
     [cell.ylImageView sd_setImageWithURL:[NSURL URLWithString:[_objects objectAtIndex:indexPath.row]]
-                      placeholderImage:[UIImage imageNamed:@"placeholder"] options:indexPath.row == 0 ? SDWebImageRefreshCached : 0];
+                      placeholderImage:[UIImage imageNamed:@"placeholder"] options:indexPath.row == 0 ? SDWebImageLimitGifSize : 0];
     return cell;
 }
 
