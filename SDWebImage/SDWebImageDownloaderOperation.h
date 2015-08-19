@@ -54,6 +54,8 @@ extern NSString *const SDWebImageDownloadFinishNotification;
  */
 @property (strong, nonatomic) NSURLResponse *response;
 
+@property (nonatomic) BOOL passedGifLimit;
+
 /**
  *  Initializes a `SDWebImageDownloaderOperation` object
  *

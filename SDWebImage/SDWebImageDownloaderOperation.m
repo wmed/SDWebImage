@@ -63,6 +63,7 @@ NSInteger const kMAX_GIF_SIZE = 2*1024*1024;;
         _executing = NO;
         _finished = NO;
         _expectedSize = 0;
+        _passedGifLimit = NO;
         responseFromCached = YES; // Initially wrong until `connection:willCacheResponse:` is called or not called
     }
     return self;
@@ -255,6 +256,7 @@ NSInteger const kMAX_GIF_SIZE = 2*1024*1024;;
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
     [self.imageData appendData:data];
     if ((self.options & SDWebImageDownloaderLimitGifSize) && self.expectedSize >= kMAX_GIF_SIZE && [INDGIFPreviewDownloader dataForFirstGIFFrameInBuffer:self.imageData error:nil]) {
+        self.passedGifLimit = YES;
         [connection cancel];
         [self connectionDidFinishLoading:connection];
         return;

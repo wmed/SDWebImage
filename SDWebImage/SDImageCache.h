@@ -21,7 +21,8 @@ typedef NS_ENUM(NSInteger, SDImageCacheType) {
     /**
      * The image was obtained from the memory cache.
      */
-    SDImageCacheTypeMemory
+    SDImageCacheTypeMemory,
+    SDImageCacheTypeGifLimit
 };
 
 typedef void(^SDWebImageQueryCompletedBlock)(UIImage *image, SDImageCacheType cacheType);

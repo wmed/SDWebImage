@@ -8,6 +8,7 @@
 
 #import "SDWebImageManager.h"
 #import <objc/message.h>
+#import "SDWebImageDownloaderOperation.h"
 
 @interface SDWebImageCombinedOperation : NSObject <SDWebImageOperation>
 
@@ -231,13 +232,18 @@
                         });
                     }
                     else {
-                        if (downloadedImage && finished) {
+                        BOOL passedGifLimit = NO;
+                        if ([subOperation isKindOfClass:([SDWebImageDownloaderOperation class])]) {
+                            passedGifLimit = ((SDWebImageDownloaderOperation*)subOperation).passedGifLimit;
+                        }
+                        
+                        if (downloadedImage && finished && !passedGifLimit) {
                             [self.imageCache storeImage:downloadedImage recalculateFromImage:NO imageData:data forKey:key toDisk:cacheOnDisk];
                         }
 
                         dispatch_main_sync_safe(^{
                             if (!weakOperation.isCancelled) {
-                                completedBlock(downloadedImage, nil, SDImageCacheTypeNone, finished, url);
+                                completedBlock(downloadedImage, nil, passedGifLimit ? SDImageCacheTypeGifLimit : SDImageCacheTypeNone, finished, url);
                             }
                         });
                     }
