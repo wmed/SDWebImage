@@ -255,11 +255,15 @@ NSInteger const kMAX_GIF_SIZE = 2*1024*1024;;
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
     [self.imageData appendData:data];
-    if ((self.options & SDWebImageDownloaderLimitGifSize) && self.expectedSize >= kMAX_GIF_SIZE && [INDGIFPreviewDownloader dataForFirstGIFFrameInBuffer:self.imageData error:nil]) {
-        self.passedGifLimit = YES;
-        [connection cancel];
-        [self connectionDidFinishLoading:connection];
-        return;
+    if ((self.options & SDWebImageDownloaderLimitGifSize) && self.expectedSize >= kMAX_GIF_SIZE) {
+        NSData *imageData = [INDGIFPreviewDownloader dataForFirstGIFFrameInBuffer:self.imageData error:nil];
+        if (imageData) {
+            self.imageData = [imageData mutableCopy];
+            self.passedGifLimit = YES;
+            [connection cancel];
+            [self connectionDidFinishLoading:connection];
+            return;
+        }
     }
     
     if ((self.options & SDWebImageDownloaderProgressiveDownload) && self.expectedSize > 0 && self.completedBlock) {
