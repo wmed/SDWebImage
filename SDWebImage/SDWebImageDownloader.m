@@ -160,7 +160,7 @@ static NSString *const kCompletedCallbackKey = @"completed";
                                                             });
                                                             for (NSDictionary *callbacks in callbacksForURL) {
                                                                 SDWebImageDownloaderCompletedBlock callback = callbacks[kCompletedCallbackKey];
-                                                                if (callback) callback(image, data, error, finished && operation.passedGifLimit);
+                                                                if (callback) callback(image, data, error, finished && !operation.passedGifLimit);
                                                             }
                                                         }
                                                         cancelled:^{

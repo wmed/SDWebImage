@@ -237,7 +237,12 @@
 
                         dispatch_main_sync_safe(^{
                             if (!weakOperation.isCancelled) {
-                                completedBlock(downloadedImage, nil, finished && data ? SDImageCacheTypeGifLimit : SDImageCacheTypeNone, finished, url);
+                                BOOL passedGifLimit = !finished && data;
+                                completedBlock(downloadedImage,
+                                               nil,
+                                               passedGifLimit ? SDImageCacheTypeGifLimit : SDImageCacheTypeNone,
+                                               passedGifLimit ? YES : finished,
+                                               url);
                             }
                         });
                     }
