@@ -49,22 +49,12 @@ static BOOL VerifyGIFVersion(const uint8_t *bytes, NSUInteger *offset, NSError *
     return valid;
 }
 
-static void SkipGlobalColorTable(const uint8_t *bytes, NSUInteger *offset)
+static void SkipColorTable(const uint8_t *bytes, NSUInteger *offset)
 {
     const uint8_t packedFields = bytes[(*offset)++];
-    const uint8_t gctFlag = packedFields >> 7;
-    if (gctFlag) {
+    const uint8_t ctFlag = packedFields >> 7;
+    if (ctFlag) {
         const uint8_t n = packedFields & 0x7;
-        *offset += (1 << (n + 1)) * 3; // # bytes = 2^(n+ 1) * 3
-    }
-}
-
-static void SkipLocalColorTable(const uint8_t *bytes, NSUInteger *offset)
-{
-    const uint8_t packedFields = bytes[(*offset)++];
-    const uint8_t lctFlag = packedFields >> 8;
-    if (lctFlag) {
-        const uint8_t n = packedFields & 0xf;
         *offset += (1 << (n + 1)) * 3; // # bytes = 2^(n+ 1) * 3
     }
 }
@@ -228,7 +218,7 @@ static NSData * GIFDataFromImageBlock(const uint8_t *bytes,
         return nil;
     }
     *offset += 8; // Skip attributes
-    SkipLocalColorTable(bytes, offset);
+    SkipColorTable(bytes, offset);
     *offset += 1; // Skip LZW Minimum Code Size
     if (!SkipBlockDataChunks(bytes, length, offset, error)) {
         return nil;
@@ -283,7 +273,7 @@ static UIImage * ExtractFirstGIFFrameInBuffer(NSData *buffer, NSError **error) {
     
     
     offset += 4; // Skip Logical Screen Width and Logical Screen Height
-    SkipGlobalColorTable(bytes, &offset);
+    SkipColorTable(bytes, &offset);
     offset += 2; // Skip Background Color Index and Pixel Aspect Ratio
     
     while (offset < length) {
@@ -424,7 +414,7 @@ static UIImage * ExtractFirstGIFFrameInBuffer(NSData *buffer, NSError **error) {
     
     
     offset += 4; // Skip Logical Screen Width and Logical Screen Height
-    SkipGlobalColorTable(bytes, &offset);
+    SkipColorTable(bytes, &offset);
     offset += 2; // Skip Background Color Index and Pixel Aspect Ratio
     
     while (offset < length) {
